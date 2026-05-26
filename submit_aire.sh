@@ -50,7 +50,7 @@ python main.py \
     --num_patches_total 15000 \
     --epochs 100 \
     --batch_size 16 \
-    --n_channels 32 \
+    --n_channels 8 \
     --latent_dim 100 \
     --learning_rate 0.0002 \
     --enable_fvf \

@@ -61,7 +61,7 @@ code_version = "meniscus_v1"
 
 # Image configuration (meniscus is grayscale only)
 image_type = ImageType.GRAYSCALE
-n_channels = 32
+n_channels = 8
 
 plot_dirs = None
 
@@ -85,7 +85,7 @@ min_patches_per_class = 15  # Minimum to avoid empty classes
 n_batch = 16
 epochs = 100
 latent_dim = 100
-d_slices = 32
+d_slices = 8
 learning_rate = 0.0002
 beta_1 = 0.5
 saving_step = 5
@@ -170,7 +170,7 @@ def parse_args():
                         help='Number of training epochs')
     parser.add_argument('--batch_size', type=int, default=16,
                         help='Batch size for training')
-    parser.add_argument('--n_channels', type=int, default=32,
+    parser.add_argument('--n_channels', type=int, default=8,
                         help='Number of output channels (depth slices)')
     parser.add_argument('--latent_dim', type=int, default=100,
                         help='Dimension of latent noise vector')
