@@ -150,6 +150,7 @@ cython_debug/
 # Project specific ignores
 results/
 data/
+!data/samples/
 *.h5
 *.out
 *.err
