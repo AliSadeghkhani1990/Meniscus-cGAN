@@ -63,7 +63,7 @@ sbatch submit_aire.sh
 
 ## Key Configuration (Paper Parameters)
 - **Patch Size**: $512 \times 512$
-- **Depth Slices**: 8
+- **Depth Slices**: 32
 - **Latent Dimension**: 100
 - **Epochs**: 100
 - **Batch Size**: 16
