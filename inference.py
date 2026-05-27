@@ -290,15 +290,13 @@ def run_grid(generator, fixed_noise, fvf_vals, mrl_vals,
     for row, mrl_t in enumerate(mrl_vals):
         for col, fvf_t in enumerate(fvf_vals):
             count += 1
-            print(f"\n  [{count}/{total}]  Target FVF={fvf_t:.3f}  MRL={mrl_t:.3f}")
-
             vol = generate_volume(generator, fixed_noise, fvf_t, mrl_t, latent_dim)
 
             # Measure actual conditions
             a_fvf, a_mrl = measure_volume(vol)
             actual_fvfs[row, col] = a_fvf
             actual_mrls[row, col] = a_mrl
-            print(f"         Actual  FVF={a_fvf:.3f}  MRL={a_mrl:.3f}")
+            print(f"\n  [{count}/{total}]  FVF={a_fvf:.3f}  MRL={a_mrl:.3f}")
 
             # File stem
             stem = f"fvf{fvf_t:.3f}_mrl{mrl_t:.3f}"
@@ -341,20 +339,6 @@ def run_grid(generator, fixed_noise, fvf_vals, mrl_vals,
             )
             ax.axis('off')
 
-    # Column labels (target FVF)
-    for col, fvf_t in enumerate(fvf_vals):
-        axes[0, col].set_title(
-            f"Target FVF={fvf_t:.3f}\n"
-            f"Actual FVF={actual_fvfs[0,col]:.3f} MRL={actual_mrls[0,col]:.3f}",
-            fontsize=8, pad=3
-        )
-
-    # Row labels (target MRL)
-    for row, mrl_t in enumerate(mrl_vals):
-        axes[row, 0].set_ylabel(
-            f"Target\nMRL={mrl_t:.3f}", fontsize=8, rotation=90, labelpad=6
-        )
-
     fig.suptitle(
         "Generated Meniscus Volumes — FVF × MRL Grid\n"
         "(middle slice shown, same noise vector for all)",
@@ -378,10 +362,10 @@ def run_single(generator, fixed_noise, fvf_t, mrl_t,
     """Generate one volume at the requested FVF and MRL."""
     os.makedirs(output_dir, exist_ok=True)
 
-    print(f"\n  Target FVF={fvf_t:.4f}  MRL={mrl_t:.4f}")
+    print(f"\n  Generating volume …")
     vol   = generate_volume(generator, fixed_noise, fvf_t, mrl_t, latent_dim)
     a_fvf, a_mrl = measure_volume(vol)
-    print(f"  Actual FVF={a_fvf:.4f}  MRL={a_mrl:.4f}")
+    print(f"  FVF={a_fvf:.4f}  MRL={a_mrl:.4f}")
 
     stem    = f"fvf{fvf_t:.3f}_mrl{mrl_t:.3f}"
     npy_out = os.path.join(output_dir, f"{stem}.npy")
@@ -404,8 +388,7 @@ def run_single(generator, fixed_noise, fvf_t, mrl_t,
         ax.set_title(f"z={idx}", fontsize=8)
         ax.axis('off')
     fig.suptitle(
-        f"FVF target={fvf_t:.3f} actual={a_fvf:.3f} | "
-        f"MRL target={mrl_t:.3f} actual={a_mrl:.3f}",
+        f"FVF={a_fvf:.3f}  |  MRL={a_mrl:.3f}",
         fontsize=10
     )
     plt.tight_layout()
