@@ -1,9 +1,17 @@
 # 3D Conditional GAN for Meniscus Tissue Generation
+This repository contains the official implementation of the 3D Conditional Generative Adversarial Network (cGAN) for synthesizing realistic meniscus tissue volumes, as presented in the paper: **"Conditional Generation of 3D Meniscus Microstructures from Micro-CT Images"** (Journal: Biomechanics and Modeling in Mechanobiology - BMMB).
 
-This repository contains the official implementation of the 3D Conditional Generative Adversarial Network (cGAN) for synthesizing realistic meniscus tissue volumes, as presented in the paper: **"Generative Modeling of 3D Meniscus Tissue Microstructure using Conditional GANs"**.
+## Trained Model
+The trained generator is publicly available on Zenodo:
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20399140.svg)](https://doi.org/10.5281/zenodo.20399140)
+
+To generate volumes using the trained model, run `inference.py` — it downloads the model automatically:
+```bash
+python inference.py
+```
 
 ## Overview
-
 The model is designed to generate 3D volumetric patches ($512 \times 512 \times 32$ pixels) of meniscus tissue, controllable via biological and structural parameters. While the code supports four conditioning factors, the journal publication focuses on:
 1. **Fiber Volume Fraction (FVF)**
 2. **Fiber Alignment**
@@ -11,7 +19,6 @@ The model is designed to generate 3D volumetric patches ($512 \times 512 \times 
 The architecture leverages 2D-based convolutions that process the depth dimension as channels, ensuring inter-slice continuity and realistic volumetric features.
 
 ## Project Structure
-
 ```text
 .
 ├── base_code/           # Core GAN modules
@@ -24,28 +31,27 @@ The architecture leverages 2D-based convolutions that process the depth dimensio
 ├── data/                # Place your training data here
 ├── results/             # Output directory for models and plots
 ├── main.py              # Main entry point for training
+├── inference.py         # Inference script (auto-downloads trained model)
 ├── submit_aire.sh       # SLURM submission script for HPC (Aire)
 ├── requirements.txt     # Python dependencies
 └── README.md
 ```
 
 ## Requirements
-
 The code is compatible with both local workstations (Windows/Linux) and HPC systems (SLURM).
 
 ### Environment Setup
 1. Create a conda environment:
-   ```bash
+```bash
    conda create -n meniscus_cgan python=3.9
    conda activate meniscus_cgan
-   ```
+```
 2. Install dependencies:
-   ```bash
+```bash
    pip install -r requirements.txt
-   ```
+```
 
 ## Usage
-
 ### 1. Data Preparation
 Organize your meniscus z-stack volumes in the `data/meniscus_data/` directory. Each sample should be a subdirectory containing sequential `.tif` or `.png` slices, or all slices can be in a single directory if using the flat structure.
 
