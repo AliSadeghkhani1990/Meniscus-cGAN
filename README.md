@@ -1,6 +1,6 @@
 # 3D Conditional GAN for Meniscus Tissue Generation
 
-This repository contains the official implementation of the 3D Conditional Generative Adversarial Network (cGAN) for synthesizing realistic meniscus tissue volumes, as presented in the paper: **"Generative Modeling of 3D Meniscus Tissue Microstructure using Conditional GANs"** (Journal: Biomechanics and Modeling in Mechanobiology - BMMB).
+This repository contains the official implementation of the 3D Conditional Generative Adversarial Network (cGAN) for synthesizing realistic meniscus tissue volumes, as presented in the paper: **"Generative Modeling of 3D Meniscus Tissue Microstructure using Conditional GANs"**.
 
 ## Overview
 
